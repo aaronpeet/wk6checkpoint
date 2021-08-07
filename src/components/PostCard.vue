@@ -5,8 +5,11 @@
       <p class="card-text">
         {{ post.body }}
       </p>
-      <p><em>{{ post.creator.name }}</em></p>
     </div>
+    <router-link router-link :to="{ name: 'Profile', params: {id: post.creatorId } }" @click.stop="" class="creator p-3 align-self-end">
+      <img class="h-100 rounded-pill" :src="post.creator.picture" alt="" srcset="">
+      <p><em>{{ post.creator.name }}</em></p>
+    </router-link>
   </div>
 </template>
 

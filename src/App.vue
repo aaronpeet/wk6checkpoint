@@ -4,7 +4,7 @@
       <div class="col-3">
         <div class="row">
           <div class="col-12">
-            profile component
+            <Login />
           </div>
         </div>
       </div>
