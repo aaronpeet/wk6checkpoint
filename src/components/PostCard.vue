@@ -1,10 +1,11 @@
 <template>
-  <div class="card m-3" style="width: 18rem;">
-    <img class="card-img-top" :src="post.creator.coverImg" alt="Card image cap">
+  <div class="card m-3 w-100">
+    <img class="card-img-top cover-img" :src="post.creator.coverImg" alt="Card image cap">
     <div class="card-body">
       <p class="card-text">
         {{ post.body }}
       </p>
+      <p><em>{{ post.creator.name }}</em></p>
     </div>
   </div>
 </template>
@@ -30,8 +31,7 @@ export default {
 
 <style lang="scss" scoped>
 .cover-img {
-  height: 200px;
-  width: 250px;
+  height: 100px;
   object-fit: cover;
 }
 a {

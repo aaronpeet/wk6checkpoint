@@ -4,16 +4,13 @@
       <div class="col-3">
         <div class="row">
           <div class="col-12">
-            Profile header
-          </div>
-          <div class="col-12">
-            profile main
+            profile component
           </div>
         </div>
       </div>
       <div class="col-9">
         <div class="row">
-          <div class="col-12">
+          <div class="col p-0">
             <Navbar />
           </div>
         </div>
@@ -22,17 +19,12 @@
             <router-view />
           </div>
           <div class="col-3">
-            my ads
+            <Ads />
           </div>
         </div>
       </div>
     </div>
   </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by Aaron Peet
-    </div>
-  </footer>
 </template>
 
 <script>
