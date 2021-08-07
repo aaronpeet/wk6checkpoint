@@ -15,6 +15,12 @@ class PostsService {
     AppState.ads = res.data
     logger.log('From Appstate:', AppState.ads)
   }
+
+  async getNewPage(url) {
+    const res = await api.get(url)
+    AppState.posts = res.data
+    logger.log('Appstate posts:', AppState.posts)
+  }
 }
 
 export const postsService = new PostsService()
