@@ -1,14 +1,14 @@
 <template>
-  <div class="profile-page container-fluid">
-    <div class="card m-3 w-100">
-      <img class="card-img-top cover-img" :src="posts.creator.coverImg" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text">
-          Name: {{ posts.creator.name }}
-        </p>
-        <p>Bio: {{ posts.creator.bio }}</p>
-      </div>
+  <div class="card m-3 w-100">
+    <img class="card-img-top cover-img" :src="posts.imgUrl" alt="Card image cap">
+    <div class="card-body">
+      <p class="card-text">
+        Name: {{ posts.name }}
+      </p>
+      <p>Bio: {{ posts.bio }}</p>
     </div>
+  </div>
+  <div class="profile-page container-fluid">
     <PostThread :posts="posts" />
   </div>
 </template>
