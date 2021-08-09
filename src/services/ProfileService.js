@@ -5,8 +5,8 @@ import { api } from './AxiosService'
 class ProfileService {
   async getAll(id) {
     const res = await api.get('/api/profiles/' + id)
-    AppState.user = res.data
-    logger.log('from appstate', AppState.user)
+    AppState.activeProfile = res.data
+    // logger.log('from appstate', AppState.user)
   }
 }
 

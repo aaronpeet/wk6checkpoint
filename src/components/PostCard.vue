@@ -11,11 +11,13 @@
       </button>
       <p>Likes: {{ post.likes.length }}</p>
       <p> {{ formatTimeStamp(post.createdAt) }}</p>
+      <div>
+        <router-link router-link :to="{ name: 'Profile', params: {id: post.creatorId } }" @click.stop="" class="creator d-flex justify-content-end">
+          <img class="h-50 mr-2 rounded-pill" :src="post.creator.picture" alt="" srcset="">
+          <p><em>{{ post.creator.name }}</em></p>
+        </router-link>
+      </div>
     </div>
-    <router-link router-link :to="{ name: 'Profile', params: {id: post.creatorId } }" @click.stop="" class="creator m-5 align-self-end">
-      <img class="h-100 rounded-pill" :src="post.creator.picture" alt="" srcset="">
-      <p><em>{{ post.creator.name }}</em></p>
-    </router-link>
     <div class="align-self-end m-3" v-if="account.id === post.creatorId && user.isAuthenticated">
       <button class="btn btn-danger" @click.stop="destroy">
         Delete

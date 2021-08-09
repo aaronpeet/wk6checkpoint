@@ -1,13 +1,13 @@
 <template>
   <div class="card m-3 w-100">
-    <!-- <img class="card-img-top cover-img" :src="post.coverImg" alt="Card image cap">
+    <img class="card-img-top cover-img rounded-pill p-2" :src="activeProfile.picture" alt="Card image cap">
     <div class="card-body">
       <p class="card-text">
-        Name: {{ post.creator.name }}
+        Name: {{ activeProfile.name }}
       </p>
-      <p>Bio: {{ user.bio }}</p>
-      <p>email: {{ post.email }}</p> -->
-  <!-- </div> -->
+      <p>Bio: {{ activeProfile.bio }}</p>
+      <p>email: {{ activeProfile.email }}</p>
+    </div>
   </div>
   <div class="profile-page container-fluid">
     <PostThread :posts="posts" />
@@ -24,10 +24,11 @@ import { profileService } from '../services/ProfileService'
 export default {
 
   setup() {
-    const router = useRoute()
+    const route = useRoute()
     onMounted(async() => {
       try {
-        await postsService.getAll({ creatorId: router.params.id })
+        await postsService.getAll({ creatorId: route.params.id })
+        await profileService.getAll(route.params.id)
       } catch (error) {
         Pop.toast(error, 'error')
       }
@@ -35,6 +36,7 @@ export default {
     return {
       posts: computed(() => AppState.posts),
       user: computed(() => AppState.user),
+      activeProfile: computed(() => AppState.activeProfile),
 
       async getAll(id) {
         await profileService.getAll(id)
