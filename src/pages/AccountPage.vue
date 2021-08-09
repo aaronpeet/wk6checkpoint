@@ -7,20 +7,18 @@
   <div v-if="user.isAuthenticated">
     <form @submit.prevent="editAccount">
       <div class="form-group">
-        <label class="pr-2" for="email">Email</label>
         <input type="text"
-               id="email"
+               id="coverImg"
                class="form-control"
-               required
-               placeholder="Email..."
-               v-model="state.account.email"
+               placeholder="Cover image..."
+               v-model="state.account.coverImg"
         >
       </div>
       <div class="form-group">
         <input type="text"
-               id="imgUrl"
+               id="picture"
                class="form-control"
-               placeholder="Image Url..."
+               placeholder="Profile picture..."
                v-model="state.account.picture"
         >
       </div>
@@ -74,6 +72,7 @@ export default {
 
       async editAccount() {
         await accountService.editAccount(state.account)
+        state.account = {}
       }
     }
   }

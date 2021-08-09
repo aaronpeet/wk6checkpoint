@@ -1,13 +1,13 @@
 <template>
   <div class="card m-3 w-100">
-    <img class="card-img-top cover-img" :src="user.imgUrl" alt="Card image cap">
+    <!-- <img class="card-img-top cover-img" :src="post.coverImg" alt="Card image cap">
     <div class="card-body">
       <p class="card-text">
-        Name: {{ user.name }}
+        Name: {{ post.creator.name }}
       </p>
       <p>Bio: {{ user.bio }}</p>
-      <p>email: {{ user.email }}</p>
-    </div>
+      <p>email: {{ post.email }}</p> -->
+  <!-- </div> -->
   </div>
   <div class="profile-page container-fluid">
     <PostThread :posts="posts" />
@@ -22,6 +22,7 @@ import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { profileService } from '../services/ProfileService'
 export default {
+
   setup() {
     const router = useRoute()
     onMounted(async() => {
@@ -33,7 +34,7 @@ export default {
     })
     return {
       posts: computed(() => AppState.posts),
-      user: computed(() => AppState.userProfile),
+      user: computed(() => AppState.user),
 
       async getAll(id) {
         await profileService.getAll(id)

@@ -43,7 +43,7 @@
       <img class="text-center m-3 w-25 rounded-pill" :src="account.picture" alt="">
       <p><b>Name: {{ account.name }}</b></p>
       <!-- <p>Bio: {{ acount.bio || 'Not Provided' }}</p> -->
-      <p>email: {{ account.email || 'Not Provided' }}</p>
+      <p>Email: {{ account.email || 'Not Provided' }}</p>
       <p>GitHub: <a :href="account.github">{{ account.github || 'Not Provided' }}</a></p>
       <p>LinkedIn: <a :href="account.linkedin">{{ account.linkedin || 'Not Provided' }}</a></p>
     </div>
