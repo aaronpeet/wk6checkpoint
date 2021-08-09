@@ -1,6 +1,34 @@
 <template>
   <div class="home flex-grow-1 align-items-center justify-content-center">
     <div>
+      <form @submit.prevent="createPost">
+        <div class="form-group">
+          <label class="pr-2" for="body">Body</label>
+          <input type="text"
+                 id="body"
+                 class="form-control"
+                 required
+                 placeholder="Share whats happening..."
+                 v-model="state.newPost.body"
+          >
+        </div>
+        <div class="form-group">
+          <label class="pr-2" for="imgUrl">Add an image!</label>
+          <input type="text"
+                 id="imgUrl"
+                 class="form-control"
+                 placeholder="Image Url..."
+                 v-model="state.newPost.imgUrl"
+          >
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+    <div>
       <button class="btn btn-primary m-2" v-if="posts.newer" @click="getNewPage(posts.newer)">
         Previous
       </button>
@@ -13,13 +41,18 @@
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { postsService } from '../services/PostsService'
+import { AuthService } from '../services/AuthService'
 export default {
   name: 'Home',
+
   setup() {
+    const state = reactive({
+      newPost: {}
+    })
     onMounted(async() => {
       try {
         await postsService.getAll()
@@ -29,11 +62,18 @@ export default {
     })
 
     return {
+      state,
       posts: computed(() => AppState.posts),
 
       async getNewPage(url) {
         await postsService.getNewPage(url)
+      },
+      async createPost() {
+        await postsService.createPost(state.newPost)
+        state.newPost = {}
+        // form.reset() NOTE: how to reset my form once its been submittd
       }
+
     }
   }
 }
