@@ -10,7 +10,7 @@
       </div>
       <div class="col-9">
         <div class="row">
-          <div class="col p-0">
+          <div class="col-12 p-0">
             <Navbar />
           </div>
         </div>

@@ -6,13 +6,17 @@
       <p class="card-text">
         {{ post.body }}
       </p>
-      <p> {{ formatTimeStamp(post.createdAt) }}</p><p>likes: {{ post.likes.length }}</p>
+      <button v-if="user.isAuthenticated" class="btn btn-success" @click="addLike(post.id)">
+        Do you like this?
+      </button>
+      <p>Likes: {{ post.likes.length }}</p>
+      <p> {{ formatTimeStamp(post.createdAt) }}</p>
     </div>
     <router-link router-link :to="{ name: 'Profile', params: {id: post.creatorId } }" @click.stop="" class="creator m-5 align-self-end">
       <img class="h-100 rounded-pill" :src="post.creator.picture" alt="" srcset="">
       <p><em>{{ post.creator.name }}</em></p>
     </router-link>
-    <div class="align-self-end m-3" v-if="account.id === post.creatorId">
+    <div class="align-self-end m-3" v-if="account.id === post.creatorId && user.isAuthenticated">
       <button class="btn btn-danger" @click.stop="destroy">
         Delete
       </button>
@@ -35,6 +39,7 @@ export default {
   setup(props) {
     return {
       account: computed(() => AppState.account),
+      user: computed(() => AppState.user),
       async destroy() {
         try {
           if (await Pop.confirm()) {
@@ -57,6 +62,10 @@ export default {
 
         const time = hours + '  :  ' + minutes
         return `${date.getMonth()} / ${date.getDate()} / ${date.getFullYear()} | ${time}`
+      },
+
+      async addLike(id) {
+        await postsService.addLike(id)
       }
     }
   }

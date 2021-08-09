@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="card ml-3 p-2 w-100 vh-100 shadow">
     <button
       class="btn btn-outline-primary text-uppercase"
       @click="login"
@@ -40,10 +40,12 @@
       </div>
     </div>
     <div>
-      <img class="text-center m-3" :src="user.picture" alt="">
-      <p>LinkIn: {{ user.linkedin || 'Not Provided' }}</p>
-      <p>GitHub: {{ user.github || 'Not Provided' }}</p>
-      <p>Resume: {{ user.resume || 'Not Provided' }}</p>
+      <img class="text-center m-3 w-25 rounded-pill" :src="account.picture" alt="">
+      <p><b>Name: {{ account.name }}</b></p>
+      <!-- <p>Bio: {{ acount.bio || 'Not Provided' }}</p> -->
+      <p>email: {{ account.email || 'Not Provided' }}</p>
+      <p>GitHub: <a :href="account.github">{{ account.github || 'Not Provided' }}</a></p>
+      <p>LinkedIn: <a :href="account.linkedin">{{ account.linkedin || 'Not Provided' }}</a></p>
     </div>
   </div>
 </template>
@@ -60,6 +62,7 @@ export default {
     return {
       state,
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },

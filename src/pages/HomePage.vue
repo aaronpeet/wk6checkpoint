@@ -1,9 +1,9 @@
 <template>
   <div class="home flex-grow-1 align-items-center justify-content-center">
-    <div>
+    <div class="card p-3 shadow" v-if="user.isAuthenticated">
       <form @submit.prevent="createPost">
         <div class="form-group">
-          <label class="pr-2" for="body">Body</label>
+          <label class="pr-2" for="body">Post Here!</label>
           <input type="text"
                  id="body"
                  class="form-control"
@@ -13,7 +13,6 @@
           >
         </div>
         <div class="form-group">
-          <label class="pr-2" for="imgUrl">Add an image!</label>
           <input type="text"
                  id="imgUrl"
                  class="form-control"
@@ -36,7 +35,17 @@
         Next
       </button>
     </div>
-    <PostThread :posts="posts" />
+    <div>
+      <PostThread :posts="posts" />
+    </div>
+    <div>
+      <button class="btn btn-primary m-2" v-if="posts.newer" @click="getNewPage(posts.newer)">
+        Previous
+      </button>
+      <button class="btn btn-primary m-2" v-if="posts.older" @click="getNewPage(posts.older)">
+        Next
+      </button>
+    </div>
   </div>
 </template>
 
@@ -45,7 +54,6 @@ import { computed, onMounted, reactive } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 import { postsService } from '../services/PostsService'
-import { AuthService } from '../services/AuthService'
 export default {
   name: 'Home',
 
@@ -64,7 +72,7 @@ export default {
     return {
       state,
       posts: computed(() => AppState.posts),
-
+      user: computed(() => AppState.user),
       async getNewPage(url) {
         await postsService.getNewPage(url)
       },
